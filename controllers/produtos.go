@@ -34,6 +34,14 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 			log.Fatal("Erro na conversão da quantidade:", err.Error())
 		}
 		models.Novo(nome, descricao, precoConvertido, quantidadeConvertida)
-		http.Redirect(w, r, "/", ST1031)
+		http.Redirect(w, r, "/", 301)
 	}
+}
+func Delete(w http.ResponseWriter, r *http.Request) {
+	// Quanto faz um Query sempre retorna um String
+	id := r.URL.Query().Get("id")
+
+	models.Deletar(id)
+	http.Redirect(w, r, "/", 301)
+
 }
